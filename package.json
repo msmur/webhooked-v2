@@ -1,6 +1,6 @@
 {
     "name": "webhooked-v2",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "Webhooked in Node + Fastify",
     "main": "src/app.ts",
     "type": "commonjs",
