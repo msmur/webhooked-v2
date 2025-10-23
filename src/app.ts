@@ -48,7 +48,7 @@ app.register(import('@fastify/swagger'), {
         info: {
             title: 'Webhooked V2',
             description: 'API Specification for the Webhooked V2 application',
-            version: '0.1.0',
+            version: '0.0.1',
         },
         servers: [
             {
