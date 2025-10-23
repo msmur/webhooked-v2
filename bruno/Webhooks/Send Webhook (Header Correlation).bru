@@ -1,0 +1,57 @@
+meta {
+  name: Send Webhook (Header Correlation)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/hooks/:hook_id/webhooks/receive
+  body: json
+  auth: inherit
+}
+
+params:path {
+  hook_id: {{hook_id}}
+}
+
+headers {
+  x-correlation-value: {{correlation-value}}
+}
+
+body:json {
+  {{payload}}
+}
+
+script:pre-request {
+  const email = bru.interpolate("{{$randomEmail}}");
+  const fullName = bru.interpolate("{{$randomFullName}}");
+  const city = bru.interpolate("{{$randomCity}}");
+  
+  const payload = {
+      id: bru.interpolate('{{$randomUUID}}'),
+      createdAt: bru.interpolate('{{$isoTimestamp}}'),
+      profile: {
+        fullName,
+        email,
+        phone: bru.interpolate('{{$randomPhoneNumber}}'),
+        address: {
+          street: bru.interpolate('{{$randomStreetAddress}}'),
+          city,
+          country: bru.interpolate('{{$randomCountry}}')
+        }
+      },
+      preferences: {
+        marketing: false,
+        theme: "system"
+      }
+  };
+  
+  const correlationValue = bru.interpolate('{{$randomUUID}}');
+  
+  bru.setVar('correlation-value', correlationValue);
+  bru.setVar('payload', payload);
+}
+
+settings {
+  encodeUrl: true
+}

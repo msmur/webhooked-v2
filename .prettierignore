@@ -1,0 +1,5 @@
+.docker
+.idea
+bruno
+dist
+node_modules

@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Webhooked V2",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

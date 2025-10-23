@@ -1,0 +1,28 @@
+meta {
+  name: Create Hook [Payload Correlation]
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/hooks
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "First Test 21/08",
+    "description": "A shorter test please",
+    "correlation_identifier_location": "payload",
+    "correlation_identifier_field": "$.id"
+  }
+}
+
+vars:post-response {
+  hook_id: res.body.id
+}
+
+settings {
+  encodeUrl: true
+}

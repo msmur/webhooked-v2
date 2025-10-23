@@ -1,0 +1,33 @@
+meta {
+  name: Create Hook [Header Correlation]
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/hooks
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-api-key: test
+}
+
+body:json {
+  {
+    "name": "A Test 23/10",
+    "description": "So yeah gonna test if this works consistently!",
+    "correlation_identifier_location": "header",
+    "correlation_identifier_field": "x-correlation-value"
+  }
+}
+
+vars:post-response {
+  hook_id: res.body.id
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
