@@ -7,7 +7,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       API_KEY: ${API_KEY}
       ENVIRONMENT: PRODUCTION
       SERVICE_NAME: webhooked-v2
