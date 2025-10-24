@@ -15,7 +15,7 @@ RUN pnpm install --frozen-lockfile
 
 # Copy source code and public files
 COPY src/ ./src/
-COPY public/ ./public/
+COPY static/ ./static/
 COPY esbuild.config.js ./
 
 # Build the TypeScript application
@@ -27,18 +27,18 @@ FROM node:24-slim AS production
 # Set working directory
 WORKDIR /app
 
-# Install pnpm globally
-RUN npm install -g pnpm
+## Install pnpm globally
+#RUN npm install -g pnpm
+#
+## Copy package files
+#COPY package.json pnpm-lock.yaml ./
+#
+## Install only production dependencies
+#RUN pnpm install --prod --frozen-lockfile
 
-# Copy package files
-COPY package.json pnpm-lock.yaml ./
-
-# Install only production dependencies
-RUN pnpm install --prod --frozen-lockfile
-
-# Copy built files and public assets
+# Copy built files and static assets
 COPY --from=builder /app/dist ./dist
-COPY public/ ./public/
+COPY static/ ./static/
 
 # Create a non-root user for security
 RUN addgroup --system --gid 1001 nodejs

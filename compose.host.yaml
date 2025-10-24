@@ -9,7 +9,7 @@ services:
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       API_KEY: ${API_KEY}
-      ENVIRONMENT: production
+      NODE_ENV: production
       SERVICE_NAME: Webhooked-v2
     depends_on:
       - db

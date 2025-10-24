@@ -4,9 +4,10 @@ import path, { join } from 'path';
 import { FastifyInstance } from 'fastify';
 
 export function addMigrationHook(fastify: FastifyInstance) {
-    const migrationFolder = 'src/migrations';
-
     fastify.addHook('onReady', async () => {
+        const isProduction = fastify.config.NODE_ENV === 'production';
+        const migrationFolder = isProduction ? 'dist/migrations' : 'src/migrations';
+
         const migrator = new Migrator({
             db: fastify.connection,
             provider: new FileMigrationProvider({

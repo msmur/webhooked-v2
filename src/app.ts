@@ -18,7 +18,7 @@ import { z, ZodError } from 'zod';
  * Use global environment variables to configure the logger given that we register the envs through plugin afterward
  */
 const app = Fastify({
-    logger: EnvToLoggerConfig[ENV.ENVIRONMENT],
+    logger: EnvToLoggerConfig[ENV.NODE_ENV],
 }).withTypeProvider<ZodTypeProvider>();
 
 app.setValidatorCompiler(validatorCompiler);
@@ -145,7 +145,7 @@ app.register(import('./routes/receive'), {
 });
 
 app.register(import('@fastify/static'), {
-    root: path.join(__dirname, '../public'),
+    root: path.join(__dirname, '../static'),
     prefix: '/',
 });
 
